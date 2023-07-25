@@ -69,8 +69,6 @@ Stretch Goals are marked with dotted lines
     * Routes
         * Users
         * Teams
-* Create connect to sportsdata.io
-    * pull golfers
 * Create oAuth
 * CRUD for Users and Teams
     * Create
@@ -80,8 +78,11 @@ Stretch Goals are marked with dotted lines
 * Make administration based on ownership
     * prevent other owners from editing non-owned teams
     * allow viewing all teams
+* Seed DB with player data
 
 ## Next Steps/Stretch Goals
+* Create connect to sportsdata.io
+    * pull golfers to seed
 * Add MVC/CRUD for:
     * Chat
     * Tournaments
