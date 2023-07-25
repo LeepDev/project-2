@@ -1,6 +1,10 @@
 # Project 2 - Golf Tournament Team Tracker
 
-    My friends and I like to build a team of pro golfers (sorta like fantasy golf) and put money on the line to see which team will come out on top.  Unfortunately the websites I have used were not up to par (:D). My app will allow users to login through google and build a team of golfers as well as their total scores for their tournament round.  It will also set certain rules such as if a golfer withdraws/can't play, a substitute golfer may be placed in seamlessly.  It will also let you set a max number of golfers per team and have a posting board for everyone to throw comments/jabs at one another. 
+    My friends and I like to build a team of pro golfers (sorta like fantasy golf) and put money on the line to see which team will come out on top.
+    Unfortunately the websites I have used were not up to par (:D).
+    My app will allow users to login through google and build a team of golfers as well as their total scores for their tournament round.
+    It will also set certain rules such as if a golfer withdraws/can't play, a substitute golfer may be placed in seamlessly.
+    It will also let you set a max number of golfers per team and have a posting board for everyone to throw comments/jabs at one another. 
 
 ## ERD (Entity Relational Diagram)
 ![ERD](https://i.imgur.com/WlORTox.png)
