@@ -37,12 +37,14 @@ My friends and I like to build a team of pro golfers (sorta like fantasy golf) a
 
 ## Wireframes
 ![Dashboard](https://i.imgur.com/QlIqNIf.png)
+![Team Edit](https://i.imgur.com/VhRjKCE.jpg)
 
 ## Technology Used
 * JS
 * HTML
 * CSS
 * sportsdata.io api (players and tournaments routes for now)
+[sportsdata.io](https://sportsdata.io/developers/api-documentation/golf#/sports-data-feed)
 
 ## Getting Started
 
