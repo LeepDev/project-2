@@ -1,0 +1,20 @@
+<%- include('../partials/header') %>
+
+
+<% if (!user) { %>
+	<p>please login to continue</p>
+<% } else if (team) { %>
+    <h3><%= team.name %></h3>
+	
+    <div>
+        <!-- <% if (team.golferArray) { %>
+        <% team.golferArray.forEach(golfer => { %>
+            <span><%= golfer.name %></span>
+        <% }) %>
+        <% } %> -->
+    </div>
+<% } else { %>
+    <p>No team exists with that Id</p>
+<% } %>
+
+<%- include('../partials/footer') %>

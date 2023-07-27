@@ -1,0 +1,26 @@
+<%- include('../partials/header') %>
+
+
+<% if (!user) { %>
+	<p>please login to continue</p>
+<% } else { %>
+	<h2><%= user.name %>'s Team</h2>
+	
+	
+	<% if (user.teamArray.length !== 0) { %>
+	<% user.teamArray.forEach(team => { %>
+		<div>
+		<h3><%= team.name %></h3>
+			<!-- <% if (team.golferArray) { %>
+			<% team.golferArray.forEach(golfer => { %>
+				<span><%= golfer.name %></span>
+			<% }) %>
+			<% } %> -->
+		</div>
+	<% }) %>
+	<% } else { %>
+		<p>No Teams yet!  Build one out!</p>
+	<% } %>
+<% } %>
+
+<%- include('../partials/footer') %>
