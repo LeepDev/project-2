@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+
+
+<% if (!user) { %>
+	<p>please login to continue</p>
+<% } else { %>
+	<% if (tournaments.length !== 0) { %>
+	<ul>
+		<%- tournaments.map(t => 
+			`<li><a href="/tournaments/${t._id}">${t.name}</a></li>`
+		).join('') %>
+	</ul>
+	<% } else { %>
+		<p>No Tournaments yet!  Build one out!</p>
+	<% } %>
+	<a href="/tournaments/new">Create New Tournament</a>
+<% } %>
+
+<%- include('../partials/footer') %>

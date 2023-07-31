@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+
+<% if (!user) { %>
+	<p>please login to continue</p>
+<% } else { %>
+    <form action="/tournaments" method="POST">
+        <label for="name">Tournament Name: </label>
+        <input name="name" type="text">
+        <br>
+        <label for="maxPlayers">Max Players: </label>
+        <input name="maxPlayers" type="number">
+        <br>
+        <label for="betAmount">Bet Amount: </label>
+        <input name="betAmount" type="number" placeholder="$ (USD)">
+        <br>
+        <label for="par">Par: </label>
+        <input name="par" type="number" placeholder="72 is the default">
+        <br>
+        <label for="cutLine">Cut Line: </label>
+        <input name="cutLine" type="number">
+        <br>
+        <button type="submit">Create Tournament</button>
+    </form>
+	
+<% } %>
+
+<%- include('../partials/footer') %>

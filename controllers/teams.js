@@ -3,23 +3,42 @@ const Team = require('../models/team')
 
 module.exports = {
     index,
-    show
+    show,
+    create,
+    new: newTeam
   }
   
-  async function index(req, res) {
+async function index(req, res) {
     try{
-        const user = req.user
-        res.render("teams/index", {
-          title: "Teams", user
-        });
+        const user = await User.findById(req.user._id).populate('team')
+        res.render("teams/index", { title: "Teams", user });
     } catch (err) {
         console.error(err)
     }
-  }
+}
 
-  function show(req, res) {
-    const team = Teams.findById(req.user)
-    res.render("teams/index", {
-      title: "Teams", team
-    });
-  }
+async function show(req, res) {
+    try{
+        const team = await Team.findById(req.params.id)
+        res.render("teams/show", { title: "Teams", team });
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+function newTeam(req, res) {
+    res.render("teams/new", { title: "Create Team" });
+}
+
+async function create(req, res) {
+    try{
+        const team = await Team.create(req.body)
+        // { user: req.user, golferArray: [ req.body.golfPro ], name: req.body.name } 
+        const user = await User.findById({ _id: req.user._id })
+        user.team.push(team._id)
+        await User.updateOne({ team: user.team })
+        res.redirect(`/teams/${team._id}`)
+    } catch (err) {
+        console.error(err)
+    }
+}

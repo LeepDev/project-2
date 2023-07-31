@@ -7,20 +7,16 @@
 	<h2><%= user.name %>'s Team</h2>
 	
 	
-	<% if (user.teamArray.length !== 0) { %>
-	<% user.teamArray.forEach(team => { %>
-		<div>
-		<h3><%= team.name %></h3>
-			<!-- <% if (team.golferArray) { %>
-			<% team.golferArray.forEach(golfer => { %>
-				<span><%= golfer.name %></span>
-			<% }) %>
-			<% } %> -->
-		</div>
-	<% }) %>
+	<% if (user.team.length !== 0) { %>	
+	<ul>
+		<%- user.team.map(t => 
+			`<li>${t.name}</li>`
+		).join('') %>
+	</ul>
 	<% } else { %>
 		<p>No Teams yet!  Build one out!</p>
-	<% } %>
+		<% } %>
+	<a href="/teams/new">Create New Team</a>
 <% } %>
 
 <%- include('../partials/footer') %>

@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+
+<% if (!user) { %>
+	<p>please login to continue</p>
+<% } else if (tournament) { %>
+    <h3><%= tournament.name %></h3>
+
+    <p>Max Players: <%= tournament.maxPlayers %></p>
+    <p>Bet Amount: $<%= tournament.betAmount %></p>
+    <p>Par: <%= tournament.par %></p>
+    <p>Cut Line: <%= tournament.par + tournament.cutLine %></p>
+
+    <h3>Teams</h3>
+
+    <ul>
+        <%- tournament.team.cast.map(t =>
+            <li><%= t.name %></li>
+        <% ).join('')
+    </ul>
+    
+    <a href="/tournaments/<%= tournament._id %>/teams">Create Team</a>
+
+<% } else { %>
+    <p>No team exists with that Id</p>
+<% } %>
+
+<%- include('../partials/footer') %>

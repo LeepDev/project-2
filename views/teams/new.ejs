@@ -1,0 +1,19 @@
+<%- include('../partials/header') %>
+
+
+<% if (!user) { %>
+	<p>please login to continue</p>
+<% } else { %>
+    <form action="/teams" method="POST">
+        <label for="name">Team Name: </label>
+        <input name="name" type="text">
+        <br>
+        <label for="golfPro">Golf Pro: </label>
+        <input name="golfPro" type="text">
+        <br>
+        <button type="submit">Create Team</button>
+    </form>
+	
+<% } %>
+
+<%- include('../partials/footer') %>

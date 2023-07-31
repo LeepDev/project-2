@@ -7,10 +7,13 @@ const teamSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true
   },
-  golferArray: [],
+  golfer: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Team'
+  }],
   tournament: {
     type: Schema.Types.ObjectId,
-    // todo: make required later
+    ref: 'Tournament'
   }
 }, {
   timestamps: true

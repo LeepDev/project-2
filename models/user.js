@@ -9,7 +9,14 @@ const userSchema = new Schema({
   },
   email: String,
   avatar: String,
-  teamArray: [],
+  team: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Team'
+  }],
+  tournament: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Tournament'
+  }],
   role: String
 }, {
   timestamps: true
