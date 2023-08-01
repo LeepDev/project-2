@@ -1,4 +1,3 @@
-const User = require('../models/user')
 const Team = require('../models/team')
 const Tournament = require('../models/tournament')
 const Golfer = require('../models/golfer')
@@ -8,7 +7,9 @@ module.exports = {
     show,
     create,
     new: newTeam,
-    delete: deleteTeam
+    delete: deleteTeam,
+    edit,
+    update
   }
   
 async function index(req, res) {
@@ -61,6 +62,28 @@ async function create(req, res) {
         const team = await Team.create(req.body)
 
         res.redirect(`/teams/${team._id}`)
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+async function edit(req, res) {
+    try {
+        const team = await Team.findById(req.params.id).populate('tournament')
+        const tournaments = await Tournament.find().sort('name')
+        res.render("teams/edit", { title: "Edit Team", team , tournaments });
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+async function update(req, res) {
+    try {
+        const team = await Team.findById(req.params.id)
+        team.name = req.body.name
+        team.tournament = req.body.tournament
+        await team.save()
+        res.redirect(`/teams/${req.params.id}`);
     } catch (err) {
         console.error(err)
     }

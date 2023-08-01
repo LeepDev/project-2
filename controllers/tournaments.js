@@ -7,7 +7,9 @@ module.exports = {
     show,
     create,
     new: newTournament,
-    delete: deleteTournament
+    delete: deleteTournament,
+    edit,
+    update
   }
   
 async function index(req, res) {
@@ -53,6 +55,30 @@ async function create(req, res) {
         req.body.user = req.user
         const tournament = await Tournament.create(req.body)
         res.redirect(`/tournaments/${tournament._id}`)
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+async function edit(req, res) {
+    try {
+        const tournament = await Tournament.findById(req.params.id)
+        res.render("tournaments/edit", { title: "Edit Tournament", tournament });
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+async function update(req, res) {
+    try {
+        const tournament = await Tournament.findById(req.params.id)
+        tournament.name = req.body.name
+        tournament.maxPlayers = req.body.maxPlayers
+        tournament.betAmount = req.body.betAmount
+        tournament.par = req.body.par
+        tournament.cutLine = req.body.cutLine
+        await tournament.save()
+        res.redirect(`/tournaments/${req.params.id}`);
     } catch (err) {
         console.error(err)
     }

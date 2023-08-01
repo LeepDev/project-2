@@ -6,7 +6,10 @@
 <% } else if (team) { %>
     <p>Tournament: <a href="/tournaments/<%= team.tournament._id %>"><%= team.tournament.name %></a></p>
     <p>Owner: <%= team.user.name %></p>
-    
+    <% if (user?._id.equals(team.user._id)) { %>
+    <p><a href="/teams/<%= team._id %>/edit">Edit Team</a></p>
+    <% } %>
+
     <% if (team.golfers.length === 0) { %>
         <p>No Golfers Yet!</p>
     <% } else { %>

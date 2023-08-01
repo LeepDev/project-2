@@ -1,0 +1,28 @@
+<%- include('../partials/header') %>
+
+
+<% if (!user) { %>
+	<p>please login to continue</p>
+<% } else { %>
+    <form action="/tournaments/<%= tournament._id %>?_method=PUT" method="POST">
+        <label for="name">Name: </label>
+        <input name="name" type="text" value="<%= tournament.name %>">
+        <br>
+        <label for="maxPlayers">Max Players: </label>
+        <input name="maxPlayers" type="number" value="<%= tournament.maxPlayers %>">
+        <br>
+        <label for="betAmount">Bet Amount: </label>
+        <input name="betAmount" type="number" value="<%= tournament.betAmount %>">
+        <br>
+        <label for="par">Par: </label>
+        <input name="par" type="number" value="<%= tournament.par %>">
+        <br>
+        <label for="cutLine">Cut Line: </label>
+        <input name="cutLine" type="number" value="<%= tournament.cutLine %>">
+        <br>
+        <button type="submit">Edit Tournament</button>
+    </form>
+	
+<% } %>
+
+<%- include('../partials/footer') %>

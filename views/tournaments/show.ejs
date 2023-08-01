@@ -40,6 +40,9 @@
     
     <p><a href="/tournaments/<%= tournament._id %>/teams/new">Create Team</a></p>
 
+    <% if (user?._id.equals(tournament.user._id)) { %>
+    <p><a href="/tournaments/<%= tournament._id %>/edit">Edit Team</a></p>
+    <% } %>
 <% } else { %>
     <p>No team exists with that Id</p>
 <% } %>

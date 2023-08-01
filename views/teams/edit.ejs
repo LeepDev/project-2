@@ -1,0 +1,23 @@
+<%- include('../partials/header') %>
+
+
+<% if (!user) { %>
+	<p>please login to continue</p>
+<% } else { %>
+    <form action="/teams/<%= team._id %>?_method=PUT" method="POST">
+        <label for="name">Team Name: </label>
+        <input name="name" type="text" value="<%= team.name %>">
+        <br>
+        <label for="tournament">Tournament: </label>
+        <select name="tournament">
+            <% tournaments.map(t => { %>
+                <option value="<%= t._id %>" <%= team.tournament._id.equals(t._id) ? 'selected' : '' %>><%= t.name %></option>
+            <% }) %>
+        </select>
+        <br>
+        <button type="submit">Edit Team</button>
+    </form>
+	
+<% } %>
+
+<%- include('../partials/footer') %>
