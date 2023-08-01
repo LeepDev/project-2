@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title><%= title %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
   <nav>
     <% if (user) { %>
+      <a href="/tournaments" <%- title === 'All Tournaments' ? 'class="active"' : '' %>>ALL TOURNAMENTS</a>
+      <a href="/teams" <%- title === 'All Teams' ? 'class="active"' : '' %>>ALL TEAMS</a>
       <a href="/logout">LOG OUT</a>
     <% } else { %>
       <a href="/auth/google">LOG IN</a>

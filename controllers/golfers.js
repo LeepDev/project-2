@@ -10,15 +10,12 @@ module.exports = {
 async function deleteGolfer(req, res) {
   try {
     const team = await Team.findById(req.params.id)
-    const tournament = await Tournament.findById(team.tournament)
   
-    if (!team || !tournament) return res.redirect('/tournaments');
+    if (!team) return res.redirect('/teams');
   
-    team.golfer.remove(req.params.gid)
-    tournament.golfer.remove(req.params.gid)
+    team.golfers.remove(req.params.gid)
   
     await team.save();
-    await tournament.save();
   
     res.redirect(`/teams/${team._id}`);
   } catch (err) {
@@ -27,15 +24,14 @@ async function deleteGolfer(req, res) {
 }
 
 async function create(req, res) {
-  const team = await Team.findById(req.params.id);
-  const tournament = await Tournament.findById(team.tournament._id);
-  team.golfer.push(req.body.golfer)
-  tournament.golfer.push(req.body.golfer)
   try {
-        await team.save()
-        await tournament.save()
+    const team = await Team.findById(req.params.id);
+    team.golfers.push(req.body.golfer)
+
+    await team.save()
+
+    res.redirect(`/teams/${team._id}`);
   } catch (err) {
     console.log(err);
   }
-  res.redirect(`/teams/${team._id}`);
 }

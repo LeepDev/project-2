@@ -6,13 +6,14 @@ module.exports = {
     index,
     show,
     create,
-    new: newTournament
+    new: newTournament,
+    delete: deleteTournament
   }
   
 async function index(req, res) {
     try{
-        const tournaments = await Tournament.find({})
-        res.render("tournaments/index", { title: "Tournaments", tournaments });
+        const tournaments = await Tournament.find().sort('name')
+        res.render("tournaments/index", { title: "All Tournaments", tournaments });
     } catch (err) {
         console.error(err)
     }
@@ -20,8 +21,9 @@ async function index(req, res) {
 
 async function show(req, res) {
     try {
-        const tournament = await Tournament.findById(req.params.id).populate('team')
-        res.render("tournaments/show", { title: "Tournaments", tournament })
+        const tournament = await Tournament.findById(req.params.id)
+        const teams = await Team.find({ tournament: req.params.id })
+        res.render("tournaments/show", { title: "Tournament " + tournament.name, tournament, teams })
     } catch (err) {
         console.error(err)
     }
@@ -31,8 +33,24 @@ function newTournament(req, res) {
     res.render("tournaments/new", { title: "Create Tournament" });
 }
 
+async function deleteTournament(req, res) {
+    try {
+        const tournament = await Tournament.findById(req.params.id)
+        
+        if (!tournament) return res.redirect('/tournaments');
+                
+        await Tournament.deleteOne({ _id: req.params.id })
+        await Team.deleteMany({ tournament: tournament._id })
+        
+        res.redirect(`/tournaments`);
+    } catch (err) {
+        console.error(err)
+    }
+}
+
 async function create(req, res) {
     try {
+        req.body.user = req.user
         const tournament = await Tournament.create(req.body)
         res.redirect(`/tournaments/${tournament._id}`)
     } catch (err) {

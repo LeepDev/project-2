@@ -4,8 +4,6 @@
 <% if (!user) { %>
 	<p>please login to continue</p>
 <% } else if (tournament) { %>
-    <h3><%= tournament.name %></h3>
-
     <p>Max Players: <%= tournament.maxPlayers %></p>
     <p>Bet Amount: $<%= tournament.betAmount %></p>
     <p>Par: <%= tournament.par %></p>
@@ -14,15 +12,18 @@
     <h3>Teams</h3>
 
     <ul>        
-        <% tournament.team.map(t => { %>
+        <% teams.map(t => { %>
             <li>
                 <a href="/teams/<%= t._id %>"><%= t.name %></a>
-                <form
-                    action="/teams/<%= t._id %>?_method=DELETE"
-                    method="POST"
-                >
-                    <button type="submit">X</button>
-                </form>
+                <% if (user?._id.equals(t.user)) { %>
+                    <form
+                        action="/teams/<%= t._id %>?_method=DELETE"
+                        method="POST"
+                        class="delete-form"
+                    >
+                        <button type="submit">X</button>
+                    </form>
+                <% } %>
             </li>
         <% }).join('') %>
     </ul>

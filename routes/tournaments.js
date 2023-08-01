@@ -7,5 +7,6 @@ router.get('/', ensureLoggedIn, tournamentsCtrl.index);
 router.get('/new', ensureLoggedIn, tournamentsCtrl.new);
 router.get('/:id', ensureLoggedIn, tournamentsCtrl.show);
 router.post('/', ensureLoggedIn, tournamentsCtrl.create)
+router.delete('/:id', ensureLoggedIn, tournamentsCtrl.delete);
 
 module.exports = router;

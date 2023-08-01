@@ -7,7 +7,7 @@ const teamSchema = new Schema({
     type: Schema.Types.ObjectId,
     required: true
   },
-  golfer: [{
+  golfers: [{
     type: Schema.Types.ObjectId,
     ref: 'Golfer'
   }],

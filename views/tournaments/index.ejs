@@ -6,9 +6,20 @@
 <% } else { %>
 	<% if (tournaments.length !== 0) { %>
 	<ul>
-		<%- tournaments.map(t => 
-			`<li><a href="/tournaments/${t._id}">${t.name}</a></li>`
-		).join('') %>
+		<% tournaments.map(t => { %>
+			<li>
+				<a href="/tournaments/<%= t._id %>"><%= t.name %></a>
+                <% if (user?._id.equals(t.user)) { %>
+					<form
+						action="/tournaments/<%= t._id %>?_method=DELETE"
+						method="POST"
+						class="delete-form"
+					>
+						<button type="submit">X</button>
+					</form>
+				<% } %>
+			</li>
+		<% }).join('') %>
 	</ul>
 	<% } else { %>
 		<p>No Tournaments yet!  Build one out!</p>

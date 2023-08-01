@@ -5,16 +5,12 @@ const tournamentSchema = new Schema({
     name: String,
     maxPlayers: Number,
     betAmount: Number,
-    golfer: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Golfer'
-    }],
-    team: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Team'
-    }],
     par: Number,
-    cutLine: Number
+    cutLine: Number,
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
 }, {
   timestamps: true
 });

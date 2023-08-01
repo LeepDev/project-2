@@ -3,20 +3,34 @@
 
 <% if (!user) { %>
 	<p>please login to continue</p>
-<% } else { %>
-	<h2><%= user.name %>'s Teams</h2>
-	
-	
-	<% if (user.team.length !== 0) { %>	
-	<ul>
-		<%- user.team.map(t => 
-			`<li><a href="/teams/${t._id}">${t.name}</a></li>`
-		).join('') %>
-	</ul>
+<% } else { %>	
+	<% if (teams.length !== 0) { %>	
+		<table>
+			<tr>
+				<th>Tournament</th>
+				<th>Team</th>
+			</tr>
+			<% teams.map(t => { %>
+				<tr>
+					<td><a href="/tournaments/<%= t.tournament._id %>"><%= t.tournament.name %></a></td>
+					<td>
+						<a href="/teams/<%= t._id %>"><%= t.name %></a>
+						<% if (user?._id.equals(t.user)) { %>
+							<form
+								action="/<%= t._id %>?_method=DELETE"
+								method="POST"
+								class="delete-form"
+							>
+								<button type="submit">X</button>
+							</form>
+						<% } %>
+					</td>
+				</tr>
+			<% }).join('') %>
+		</table>
 	<% } else { %>
 		<p>No Teams yet!  Build one out!</p>
-		<% } %>
-	<a href="/tournaments">Go to tournaments to build out your team</a>
+	<% } %>
 <% } %>
 
 <%- include('../partials/footer') %>

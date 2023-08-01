@@ -4,7 +4,7 @@ const passport = require('passport');
 const indexCtrl = require("../controllers/index.js")
 const ensureLoggedIn = require('../config/ensureLoggedIn');
 
-router.get('/', ensureLoggedIn, indexCtrl.index);
+router.get('/', indexCtrl.index);
 
 // Google OAuth login route
 router.get('/auth/google', passport.authenticate(

@@ -13,8 +13,8 @@ module.exports = {
   
 async function index(req, res) {
     try{
-        const user = await User.findById(req.user).populate('team')
-        res.render("teams/index", { title: "Teams", user });
+        const teams = await Team.find().populate('tournament').sort('tournament')
+        res.render("teams/index", { title: "All Teams", teams });
     } catch (err) {
         console.error(err)
     }
@@ -22,12 +22,11 @@ async function index(req, res) {
 
 async function show(req, res) {
     try{
-        const team = await Team.findById(req.params.id).populate('golfer')
-        const tournament = await Tournament.findById(team.tournament)
-        const golfersInTourney = tournament.golfer
-        const allGolfers = await Golfer.find({})
-        let golfers = allGolfers.filter(g => !golfersInTourney.includes(g._id))
-        res.render("teams/show", { title: "Teams", team, golfers, tournament });
+        const team = await Team.findById(req.params.id).populate('golfers tournament')
+        const tournamentTeams = await Team.find({ tournament: team.tournament })
+        const golfersInTourney = tournamentTeams.flatMap(team => {return team.golfers})
+        const golfers = await Golfer.find({ _id: { $nin: golfersInTourney }})
+        res.render("teams/show", { title: "Team " + team.name, team, golfers });
     } catch (err) {
         console.error(err)
     }
@@ -44,20 +43,12 @@ async function newTeam(req, res) {
 async function deleteTeam(req, res) {
     try {
       const team = await Team.findById(req.params.id)
-      const tournament = await Tournament.findById(team.tournament)
-      const user = await User.findById(req.user)
     
-      if (!team || !tournament) return res.redirect('/tournaments');
+      if (!team) return res.redirect('/tournaments');
     
-      user.team.remove(req.params.id)
-      tournament.team.remove(req.params.id)
-      team.golfer.map(g => tournament.golfer.remove(g))
-      
-      await user.save();
-      await tournament.save();
       await Team.deleteOne({ _id: req.params.id })
       
-      res.redirect(`/tournaments/${tournament._id}`);
+      res.redirect(`/teams`);
     } catch (err) {
       console.error(err)
     }
@@ -68,14 +59,6 @@ async function create(req, res) {
         req.body.user = req.user
         req.body.tournament = req.params.id
         const team = await Team.create(req.body)
-
-        const user = await User.findById(req.user)
-        user.team.push(team)
-        await user.save()
-
-        const tournament = await Tournament.findById(req.params.id)
-        tournament.team.push(team)
-        await tournament.save()
 
         res.redirect(`/teams/${team._id}`)
     } catch (err) {
