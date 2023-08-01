@@ -54,8 +54,6 @@ Stretch Goals are marked with dotted lines
 * JS
 * HTML
 * CSS
-* sportsdata.io api (players and tournaments routes for now)
-[sportsdata.io](https://sportsdata.io/developers/api-documentation/golf#/sports-data-feed)
 
 ## Getting Started
 
@@ -92,7 +90,9 @@ Stretch Goals are marked with dotted lines
     * Golf Pros
     * Golf Rounds
 * Add User Roles (aka: admin or team manager or etc)
-* Add more sportsdata.io routes to the api (player stats/tournament stats/tournament schedules/etc)
 * Add logic for betting/viewing standings
 * View history win/loss
 * Look at the team dashboard and comment on who's winning/losing and always make fun of the losing team
+* sportsdata.io api (players and tournaments routes for now)
+[sportsdata.io](https://sportsdata.io/developers/api-documentation/golf#/sports-data-feed)
+* Add more sportsdata.io routes to the api (player stats/tournament stats/tournament schedules/etc)

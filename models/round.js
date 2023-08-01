@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const roundSchema = new Schema({
-    number: Number,
+    roundNumber: Number,
     score: Number,
     golferStatus: String,
     tournament: {
