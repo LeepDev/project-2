@@ -5,26 +5,26 @@ My friends and I like to build a team of pro golfers (sorta like fantasy golf) a
 ## ERD (Entity Relational Diagram)
 Stretch Goals are marked with dotted lines
 
-![ERD](https://i.imgur.com/vrvHnl1.png)
+![ERD](https://i.imgur.com/WEnlHoP.png)
 
 ## Restful Routing Chart
 | VERB   | URL pattern           | Action (CRUD)    | Description |
 | ----   | -----------           | -------------    | ----------- |
 | GET    | /teams                | Index (Read)     | lists all teams |
-| GET    | /teams/new            | New (Read)       | shows a form to make a new team |
-| POST   | /teams                | Create (Create)  | creates a team with the POST payload (form) data |
-| GET    | /teams/:id            | Show (Read)      | shows a specific player on the team |
-| GET    | /teams/edit/:id       | Edit (Read)      | shows a form for editing a specific player |
-| PUT    | /teams/:id            | Update (Update)  | updates the data for specific player |
-| DELETE | /teams/:id            | Destroy (Delete) | deletes the player |
+| GET    | /tournaments/:id/teams/new | New (Read)       | shows a form to make a new team |
+| POST   | /tournaments/:id/teams | Create (Create)  | creates a team with the POST payload (form) data |
+| GET    | /teams/:id            | Show (Read)      | shows a specific team |
+| GET    | /teams/:id/edit       | Edit (Read)      | shows a form for editing a specific team |
+| PUT    | /teams/:id            | Update (Update)  | updates the data for specific team |
+| DELETE | /teams/:id            | Destroy (Delete) | deletes the team |
 | | | |
 | GET    | /tournaments          | Index (Read)     | lists all tournaments |
 | GET    | /tournaments/new      | New (Read)       | shows a form to make a new tournament |
 | POST   | /tournaments          | Create (Create)  | creates a tournament with the POST payload (form) data |
-| GET    | /tournaments/:id      | Show (Read)      | shows a specific team in the tournament |
-| GET    | /tournaments/edit/:id | Edit (Read)      | shows a form for editing a specific team |
-| PUT    | /tournaments/:id      | Update (Update)  | updates the data for specific team |
-| DELETE | /tournaments/:id      | Destroy (Delete) | deletes the team |
+| GET    | /tournaments/:id      | Show (Read)      | shows a specific tournament |
+| GET    | /tournaments/:id/edit | Edit (Read)      | shows a form for editing a specific tournament |
+| PUT    | /tournaments/:id      | Update (Update)  | updates the data for specific tournament |
+| DELETE | /tournaments/:id      | Destroy (Delete) | deletes the tournament |
 
 ## User Stories
 ### User
@@ -42,8 +42,13 @@ Stretch Goals are marked with dotted lines
 * As an Admin, I want to be able to move TMs from from one tournament to another so that if someone is misplaced, they can be adjusted easily
 
 ## Wireframes
-![Dashboard](https://i.imgur.com/QlIqNIf.png)
-![Team Edit](https://i.imgur.com/VhRjKCE.jpg)
+![Landing Page](https://i.imgur.com/E6iLL7r.png)
+
+![All Tourney](https://i.imgur.com/QsWzCXm.png)
+
+![All Teams](https://i.imgur.com/vrqGVn3.png)
+
+![Edit Team](https://i.imgur.com/0NGoiBq.png)
 
 ## Technology Used
 * JS
@@ -57,8 +62,6 @@ Stretch Goals are marked with dotted lines
 * Login using google credentials
 * Click create team
 * Add golfers
-* Hit Done
-* Look at the team dashboard and comment on who's winning/losing and always make fun of the losing team
 
 ## MVP
 * Create MVC for project
@@ -91,4 +94,5 @@ Stretch Goals are marked with dotted lines
 * Add User Roles (aka: admin or team manager or etc)
 * Add more sportsdata.io routes to the api (player stats/tournament stats/tournament schedules/etc)
 * Add logic for betting/viewing standings
-* view history win/loss
+* View history win/loss
+* Look at the team dashboard and comment on who's winning/losing and always make fun of the losing team
