@@ -12,7 +12,7 @@ module.exports = {
   
 async function index(req, res) {
     try{
-        const tournaments = await Tournament.find().sort('name')
+        const tournaments = await Tournament.find().populate('user').sort('name')
         res.render("tournaments/index", { title: "All Tournaments", tournaments });
     } catch (err) {
         console.error(err)
@@ -21,8 +21,8 @@ async function index(req, res) {
 
 async function show(req, res) {
     try {
-        const tournament = await Tournament.findById(req.params.id)
-        const teams = await Team.find({ tournament: req.params.id })
+        const tournament = await Tournament.findById(req.params.id).populate('user')
+        const teams = await Team.find({ tournament: req.params.id }).populate('user').sort('name')
         res.render("tournaments/show", { title: "Tournament " + tournament.name, tournament, teams })
     } catch (err) {
         console.error(err)

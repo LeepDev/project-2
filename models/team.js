@@ -5,6 +5,7 @@ const teamSchema = new Schema({
   name: String,
   user: {
     type: Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   },
   golfers: [{

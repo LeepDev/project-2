@@ -90,3 +90,5 @@ Stretch Goals are marked with dotted lines
     * Golf Rounds
 * Add User Roles (aka: admin or team manager or etc)
 * Add more sportsdata.io routes to the api (player stats/tournament stats/tournament schedules/etc)
+* Add logic for betting/viewing standings
+* view history win/loss

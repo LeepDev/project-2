@@ -13,7 +13,7 @@ module.exports = {
   
 async function index(req, res) {
     try{
-        const teams = await Team.find().populate('tournament').sort('tournament')
+        const teams = await Team.find().populate('tournament user').sort('tournament')
         res.render("teams/index", { title: "All Teams", teams });
     } catch (err) {
         console.error(err)
@@ -22,7 +22,7 @@ async function index(req, res) {
 
 async function show(req, res) {
     try{
-        const team = await Team.findById(req.params.id).populate('golfers tournament')
+        const team = await Team.findById(req.params.id).populate('golfers tournament user')
         const tournamentTeams = await Team.find({ tournament: team.tournament })
         const golfersInTourney = tournamentTeams.flatMap(team => {return team.golfers})
         const golfers = await Golfer.find({ _id: { $nin: golfersInTourney }})

@@ -4,18 +4,23 @@
 <% if (!user) { %>
 	<p>please login to continue</p>
 <% } else if (tournament) { %>
+    <p>Owner: <%= tournament.user.name %></p>
     <p>Max Players: <%= tournament.maxPlayers %></p>
     <p>Bet Amount: $<%= tournament.betAmount %></p>
     <p>Par: <%= tournament.par %></p>
     <p>Cut Line: <%= tournament.par + tournament.cutLine %></p>
 
-    <h3>Teams</h3>
-
-    <ul>        
+    <table>
+        <tr>
+            <th>Team</th>
+            <th>Owner</th>
+        </tr>
         <% teams.map(t => { %>
-            <li>
-                <a href="/teams/<%= t._id %>"><%= t.name %></a>
-                <% if (user?._id.equals(t.user)) { %>
+        <tr>
+            <td><a href="/teams/<%= t._id %>"><%= t.name %></a></td>
+            <td>
+                <%= t.user.name %>
+                <% if (user?._id.equals(t.user._id)) { %>
                     <form
                         action="/teams/<%= t._id %>?_method=DELETE"
                         method="POST"
@@ -24,11 +29,16 @@
                         <button type="submit">X</button>
                     </form>
                 <% } %>
-            </li>
+            </td>
+        </tr>
         <% }).join('') %>
-    </ul>
+    </table>
     
-    <a href="/tournaments/<%= tournament._id %>/teams/new">Create Team</a>
+    <% if(teams.length === 0) { %>
+    <p>No Teams Yet!</p>
+    <% } %>
+    
+    <p><a href="/tournaments/<%= tournament._id %>/teams/new">Create Team</a></p>
 
 <% } else { %>
     <p>No team exists with that Id</p>

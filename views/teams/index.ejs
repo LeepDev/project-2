@@ -7,17 +7,19 @@
 	<% if (teams.length !== 0) { %>	
 		<table>
 			<tr>
-				<th>Tournament</th>
 				<th>Team</th>
+				<th>Tournament</th>
+				<th>Owner</th>
 			</tr>
 			<% teams.map(t => { %>
 				<tr>
+					<td><a href="/teams/<%= t._id %>"><%= t.name %></a></td>
 					<td><a href="/tournaments/<%= t.tournament._id %>"><%= t.tournament.name %></a></td>
 					<td>
-						<a href="/teams/<%= t._id %>"><%= t.name %></a>
-						<% if (user?._id.equals(t.user)) { %>
+						<%= t.user.name %>
+						<% if (user?._id.equals(t.user._id)) { %>
 							<form
-								action="/<%= t._id %>?_method=DELETE"
+								action="/teams/<%= t._id %>?_method=DELETE"
 								method="POST"
 								class="delete-form"
 							>

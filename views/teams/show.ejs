@@ -4,7 +4,9 @@
 <% if (!user) { %>
 	<p>please login to continue</p>
 <% } else if (team) { %>
-    <h3>Tournament <a href="/tournaments/<%= team.tournament._id %>"><%= team.tournament.name %></a></h3>
+    <p>Tournament: <a href="/tournaments/<%= team.tournament._id %>"><%= team.tournament.name %></a></p>
+    <p>Owner: <%= team.user.name %></p>
+    
     <% if (team.golfers.length === 0) { %>
         <p>No Golfers Yet!</p>
     <% } else { %>
@@ -13,7 +15,7 @@
             <% team.golfers.map(g => { %>
                 <li>
                     <%= g.name %>
-                    <% if (user?._id.equals(team.user)) { %>
+                    <% if (user?._id.equals(team.user._id)) { %>
                         <form
                             action="/teams/<%= team._id %>/golfers/<%= g.id %>?_method=DELETE"
                             method="POST"
@@ -27,7 +29,7 @@
         </ul>
     <% } %>
 
-    <% if (user?._id.equals(team.user)) { %>
+    <% if (user?._id.equals(team.user._id)) { %>
     <form action="/teams/<%= team._id %>/golfers" method="POST">
         <label for="golfer">Choose Golfer to Add: </label>
         <select name="golfer">

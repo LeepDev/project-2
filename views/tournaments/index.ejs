@@ -5,26 +5,33 @@
 	<p>please login to continue</p>
 <% } else { %>
 	<% if (tournaments.length !== 0) { %>
-	<ul>
-		<% tournaments.map(t => { %>
-			<li>
-				<a href="/tournaments/<%= t._id %>"><%= t.name %></a>
-                <% if (user?._id.equals(t.user)) { %>
-					<form
-						action="/tournaments/<%= t._id %>?_method=DELETE"
-						method="POST"
-						class="delete-form"
-					>
-						<button type="submit">X</button>
-					</form>
-				<% } %>
-			</li>
-		<% }).join('') %>
-	</ul>
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Owner</th>
+			</tr>
+			<% tournaments.map(t => { %>
+			<tr>
+				<td><a href="/tournaments/<%= t._id %>"><%= t.name %></a></td>
+				<td>
+					<%= t.user.name %>
+					<% if (user?._id.equals(t.user._id)) { %>
+						<form
+							action="/tournaments/<%= t._id %>?_method=DELETE"
+							method="POST"
+							class="delete-form"
+						>
+							<button type="submit">X</button>
+						</form>
+					<% } %>
+				</td>
+			</tr>
+			<% }).join('') %>
+		</table>
 	<% } else { %>
 		<p>No Tournaments yet!  Build one out!</p>
 	<% } %>
-	<a href="/tournaments/new">Create New Tournament</a>
+	<p><a href="/tournaments/new">Create New Tournament</a></p>
 <% } %>
 
 <%- include('../partials/footer') %>
