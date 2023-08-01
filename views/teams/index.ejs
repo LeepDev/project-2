@@ -4,19 +4,19 @@
 <% if (!user) { %>
 	<p>please login to continue</p>
 <% } else { %>
-	<h2><%= user.name %>'s Team</h2>
+	<h2><%= user.name %>'s Teams</h2>
 	
 	
 	<% if (user.team.length !== 0) { %>	
 	<ul>
 		<%- user.team.map(t => 
-			`<li>${t.name}</li>`
+			`<li><a href="/teams/${t._id}">${t.name}</a></li>`
 		).join('') %>
 	</ul>
 	<% } else { %>
 		<p>No Teams yet!  Build one out!</p>
 		<% } %>
-	<a href="/teams/new">Create New Team</a>
+	<a href="/tournaments">Go to tournaments to build out your team</a>
 <% } %>
 
 <%- include('../partials/footer') %>

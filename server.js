@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
+var methodOverride = require('method-override');
 
 require('dotenv').config();
 require('./config/database');
@@ -14,6 +15,7 @@ require('./config/passport');
 const indexRouter = require('./routes/index');
 const teamsRouter = require('./routes/teams');
 const tournamentsRouter = require('./routes/tournaments');
+const golfersRouter = require('./routes/golfers');
 
 const app = express();
 
@@ -26,6 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
 
 app.use(session({
   secret: process.env.GOOGLE_SECRET,
@@ -43,8 +46,9 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', indexRouter);
-app.use('/teams', teamsRouter);
 app.use('/tournaments', tournamentsRouter);
+app.use('/', teamsRouter);
+app.use('/', golfersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

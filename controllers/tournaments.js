@@ -19,9 +19,9 @@ async function index(req, res) {
 }
 
 async function show(req, res) {
-    try{
+    try {
         const tournament = await Tournament.findById(req.params.id).populate('team')
-        res.render("tournaments/show", { title: "Tournaments", tournament });
+        res.render("tournaments/show", { title: "Tournaments", tournament })
     } catch (err) {
         console.error(err)
     }

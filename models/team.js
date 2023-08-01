@@ -9,7 +9,7 @@ const teamSchema = new Schema({
   },
   golfer: [{
     type: Schema.Types.ObjectId,
-    ref: 'Team'
+    ref: 'Golfer'
   }],
   tournament: {
     type: Schema.Types.ObjectId,

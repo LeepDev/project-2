@@ -5,14 +5,34 @@
 	<p>please login to continue</p>
 <% } else if (team) { %>
     <h3><%= team.name %></h3>
-	
-    <div>
-        <!-- <% if (team.golferArray) { %>
-        <% team.golferArray.forEach(golfer => { %>
-            <span><%= golfer.name %></span>
-        <% }) %>
-        <% } %> -->
-    </div>
+    <p><a href="/tournaments/<%= tournament._id %>"><%= tournament.name %></a></p>
+    <% if (team.golfer.length === 0) { %>
+        <p>No Golfers Yet!</p>
+    <% } else { %>
+        <ul>
+            <% team.golfer.map(g => { %>
+                <li>
+                    <%= g.name %>
+                    <form
+                        action="/teams/<%= team._id %>/golfers/<%= g.id %>?_method=DELETE"
+                        method="POST"
+                    >
+                        <button type="submit">X</button>
+                    </form>
+                </li>
+            <% }).join('') %>
+        </ul>
+    <% } %>
+
+    <form action="/teams/<%= team._id %>/golfers" method="POST">
+        <label for="golfer">Choose Golfer to Add: </label>
+        <select name="golfer">
+            <%- golfers.map(g =>
+                `<option value="${g._id}">${g.name}</option>`
+            ) %>
+        </select>
+        <button type="submit">Add Golfer</button>
+    </form>
 <% } else { %>
     <p>No team exists with that Id</p>
 <% } %>

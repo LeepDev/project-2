@@ -13,13 +13,21 @@
 
     <h3>Teams</h3>
 
-    <ul>
-        <%- tournament.team.cast.map(t =>
-            <li><%= t.name %></li>
-        <% ).join('')
+    <ul>        
+        <% tournament.team.map(t => { %>
+            <li>
+                <a href="/teams/<%= t._id %>"><%= t.name %></a>
+                <form
+                    action="/teams/<%= t._id %>?_method=DELETE"
+                    method="POST"
+                >
+                    <button type="submit">X</button>
+                </form>
+            </li>
+        <% }).join('') %>
     </ul>
     
-    <a href="/tournaments/<%= tournament._id %>/teams">Create Team</a>
+    <a href="/tournaments/<%= tournament._id %>/teams/new">Create Team</a>
 
 <% } else { %>
     <p>No team exists with that Id</p>
